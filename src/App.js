@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState,useEffect } from "react";
+import TodoList from './TodoList';
+import InputForm from "./InputForm";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(){
+
+    const [todo , setTodo] = useState([]);
+
+    function updateList(inputText){
+        setTodo((prev)=>([...prev , inputText]))
+    }
+
+    useEffect(()=>{
+        const arr = localStorage.getItem('list');
+        if(arr){
+            setTodo(JSON.parse(arr))
+        }
+    },[]);
+
+    useEffect(()=>{
+        localStorage.setItem('list',JSON.stringify(todo))
+    },[todo])
+
+    function DeleteItem(id){
+        setTodo((prev)=>{
+            return prev.filter((item,index)=>{
+                return index !== id;
+            })
+        })        
+    }
+
+    return <div className="container">
+        <div className="heading">
+            <h1>To-Do List</h1>
+        </div>
+        <InputForm onAdd={updateList} />
+        <div>
+            <ul>
+                {todo.map((item,index)=>(<TodoList key={index} ondeleteitem={DeleteItem} id={index} text={item} />))}
+            </ul>
+        </div>
+    </div>;
 }
 
 export default App;
