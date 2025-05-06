@@ -1,8 +1,6 @@
 import React, { useState,useEffect } from "react";
 import TodoList from './TodoList';
 import InputForm from "./InputForm";
-import Fab from '@mui/material/Fab';
-import ClearIcon from '@mui/icons-material/Clear';
 
 function App(){
 
