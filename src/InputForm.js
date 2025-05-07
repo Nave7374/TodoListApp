@@ -9,13 +9,14 @@ function InputForm(props){
         setInputText(newValue);
     }
 
-    return (<div className="form">
-        <input type="text" value={inputText} onChange={handleChange} />
-        <button onClick={() =>{
-            props.onAdd(inputText)
-            setInputText("")
-        }}>Add</button>
-    </div>);
+    return (<form className="form" onSubmit={(e) =>{
+        e.preventDefault();
+        props.onAdd(inputText)
+        setInputText("")
+    }}>
+        <input type="text" value={inputText} onChange={handleChange} required />
+        <button type="submit">Add</button>
+    </form>);
 
 }
 

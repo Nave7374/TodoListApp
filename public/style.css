@@ -7,7 +7,6 @@ body {
     justify-content: center;
     align-items: center;
     color: hsl(198, 1%, 29%);
-    font-family: "Architects Daughter", cursive;
     text-align: center;
     font-size: 130%;
   }
@@ -77,3 +76,7 @@ body {
     position: relative;
     padding: 0.5rem;
   } 
+
+  button:hover {
+    cursor: pointer;
+  }
